@@ -6,7 +6,7 @@ QFlex runs browser actions within the calling agent's requested scope. Its curre
 
 ## Status
 
-QFlex 0.1.5 is an experimental pre-release provided for preview and evaluation. Website coverage, connected-agent acceptance, and support on specific operating systems have not been established.
+QFlex 0.1.6 is an experimental pre-release provided for preview and evaluation. Website coverage, connected-agent acceptance, and support on specific operating systems have not been established.
 
 ## Download and install
 
@@ -31,4 +31,4 @@ This repository hosts public documentation, issue tracking, and release assets. 
 
 ## License
 
-QFlex is distributed under the MIT License; see [LICENSE](LICENSE).
+QFlex is proprietary software distributed under the [QFlex End User License Agreement](LICENSE). Personal use, internal business use, and AI agent integration for those purposes are permitted without a license fee. Redistribution, resale, and providing QFlex functionality to third parties as a service require separate written permission. Third-party components retain their own licenses. Copies previously supplied under MIT remain governed by MIT.

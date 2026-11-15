@@ -1,0 +1,21 @@
+{
+  "assets": {
+    "SHA256SUMS": "04a89888d64698d4ff2e49e2ffbd3cd875ce6587e3d57ddd214c5e44679ca8ea",
+    "qflex-0.1.6-runtime.tar.gz": "e3ca3930947097b018f5cb78be50bacb546a0a691bff48b82a4fde28d4fe1ae4",
+    "qflex-0.1.6-runtime.zip": "2d170591e8fa18953998b67e22d7807f67993934fd1c51b34a9c944fe2a369ef"
+  },
+  "files": {
+    ".github/ISSUE_TEMPLATE/bug_report.yml": "5bf8a442b82662b1d4d6cf969716ae9cfcb3a7e76a8b8423c3248717b8ab129f",
+    ".github/ISSUE_TEMPLATE/config.yml": "1f103c6a9dd07cd13a9a6f17ace6b813f47747eb9cb7e00488cb2073caaf91bb",
+    ".github/ISSUE_TEMPLATE/feature_request.yml": "c1991887bc25235c4ae7a02148c51adc8fd43827a83ed424fe906565f54feb36",
+    "CHANGELOG.md": "f07977310f31a0b835a62d07b341db35919ebd2f73f928bfebacf0eb7c0ab236",
+    "CONTRIBUTING.md": "9da7ac40242c316bf44b763139f3b547657348109bdba1f17e2a5b844bd0a202",
+    "LICENSE": "706541113563ec08952bea3521c9161a7751f77ad6c53ac1ca8e3252f92f04b9",
+    "README.md": "929ecfdb48e5ad749aaa6b554ff84b6d565cf60b2c964632bdb9a22200693c76",
+    "docs/installation.md": "3d5a0eb901fd2635294fd8b3b6a3f766f99a2d99abec2cac3d94b8dd354b9122"
+  },
+  "fingerprint": "d4eac65406beaea7208895f2cae1d6db696d1521e9e2561351c8baea37740f1b",
+  "notesSha256": "d4d03183f43e117db05076889bc541232cd725755daf47d2e513fd96887a3f99",
+  "schemaVersion": 1,
+  "version": "0.1.6"
+}
