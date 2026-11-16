@@ -1,6 +1,6 @@
 # Install the QFlex runtime
 
-QFlex 0.1.6 is an experimental, source-free runtime preview. It includes compiled JavaScript, package manifests, the frozen pnpm lockfile, and the unpacked Chrome extension; it does not include TypeScript source, source maps, build scripts, tests, or fixture servers. This release is a prerelease and has not been verified on macOS or Linux.
+QFlex 0.1.7 is an experimental, source-free runtime preview. It includes compiled JavaScript, package manifests, the frozen pnpm lockfile, and the unpacked Chrome extension; it does not include TypeScript source, source maps, build scripts, tests, or fixture servers. This release is a prerelease and has not been verified on macOS or Linux.
 
 ## Requirements
 
@@ -8,13 +8,13 @@ Use Node.js 26.7.0 and pnpm 12.11.2. The runtime requires an existing Chrome ins
 
 ## Download and verify
 
-Download one archive and `SHA256SUMS` from the [v0.1.6 prerelease](https://github.com/whackur/qflex/releases/tag/v0.1.6). The direct assets are [ZIP](https://github.com/whackur/qflex/releases/download/v0.1.6/qflex-0.1.6-runtime.zip), [tar.gz](https://github.com/whackur/qflex/releases/download/v0.1.6/qflex-0.1.6-runtime.tar.gz), and [SHA256SUMS](https://github.com/whackur/qflex/releases/download/v0.1.6/SHA256SUMS). Keep the files in the same directory while checking the checksum.
+Download one archive and `SHA256SUMS` from the [v0.1.7 prerelease](https://github.com/whackur/qflex/releases/tag/v0.1.7). The direct assets are [ZIP](https://github.com/whackur/qflex/releases/download/v0.1.7/qflex-0.1.7-runtime.zip), [tar.gz](https://github.com/whackur/qflex/releases/download/v0.1.7/qflex-0.1.7-runtime.tar.gz), and [SHA256SUMS](https://github.com/whackur/qflex/releases/download/v0.1.7/SHA256SUMS). Keep the files in the same directory while checking the checksum.
 
 On Windows PowerShell, verify the ZIP by comparing its digest with the matching `SHA256SUMS` line:
 
 ```powershell
-$actual = (Get-FileHash .\qflex-0.1.6-runtime.zip -Algorithm SHA256).Hash.ToLowerInvariant()
-$expectedLine = Get-Content .\SHA256SUMS | Where-Object { $_ -match '  qflex-0.1.6-runtime\.zip$' }
+$actual = (Get-FileHash .\qflex-0.1.7-runtime.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+$expectedLine = Get-Content .\SHA256SUMS | Where-Object { $_ -match '  qflex-0.1.7-runtime\.zip$' }
 $expected = ($expectedLine -split '\s+')[0]
 if ($actual -ne $expected) { throw 'SHA-256 mismatch' }
 ```
@@ -22,30 +22,30 @@ if ($actual -ne $expected) { throw 'SHA-256 mismatch' }
 On macOS, run:
 
 ```bash
-actual=$(shasum -a 256 ./qflex-0.1.6-runtime.tar.gz | awk '{print $1}')
-expected=$(awk '$2 == "qflex-0.1.6-runtime.tar.gz" { print $1 }' SHA256SUMS)
+actual=$(shasum -a 256 ./qflex-0.1.7-runtime.tar.gz | awk '{print $1}')
+expected=$(awk '$2 == "qflex-0.1.7-runtime.tar.gz" { print $1 }' SHA256SUMS)
 test "$actual" = "$expected"
 ```
 
 On Linux, run:
 
 ```bash
-actual=$(sha256sum ./qflex-0.1.6-runtime.tar.gz | awk '{print $1}')
-expected=$(awk '$2 == "qflex-0.1.6-runtime.tar.gz" { print $1 }' SHA256SUMS)
+actual=$(sha256sum ./qflex-0.1.7-runtime.tar.gz | awk '{print $1}')
+expected=$(awk '$2 == "qflex-0.1.7-runtime.tar.gz" { print $1 }' SHA256SUMS)
 test "$actual" = "$expected"
 ```
 
 ## Extract and install production dependencies
 
-The archive contains a `qflex-0.1.6-runtime` directory. Choose a permanent, user-owned install location and do not move it after configuring the native host or MCP client.
+The archive contains a `qflex-0.1.7-runtime` directory. Choose a permanent, user-owned install location and do not move it after configuring the native host or MCP client.
 
 Windows PowerShell:
 
 ```powershell
-$installBase = Join-Path $HOME '.qflex\runtime\0.1.6'
+$installBase = Join-Path $HOME '.qflex\runtime\0.1.7'
 New-Item -ItemType Directory -Force -Path $installBase | Out-Null
-Expand-Archive .\qflex-0.1.6-runtime.zip -DestinationPath $installBase
-$runtime = Join-Path $installBase 'qflex-0.1.6-runtime'
+Expand-Archive .\qflex-0.1.7-runtime.zip -DestinationPath $installBase
+$runtime = Join-Path $installBase 'qflex-0.1.7-runtime'
 Push-Location $runtime
 pnpm install --prod --frozen-lockfile --ignore-scripts
 Pop-Location
@@ -54,10 +54,10 @@ Pop-Location
 macOS or Linux with bash or zsh:
 
 ```bash
-install_base="$HOME/.qflex/runtime/0.1.6"
+install_base="$HOME/.qflex/runtime/0.1.7"
 mkdir -p "$install_base"
-tar -xzf ./qflex-0.1.6-runtime.tar.gz -C "$install_base"
-runtime="$install_base/qflex-0.1.6-runtime"
+tar -xzf ./qflex-0.1.7-runtime.tar.gz -C "$install_base"
+runtime="$install_base/qflex-0.1.7-runtime"
 cd "$runtime"
 pnpm install --prod --frozen-lockfile --ignore-scripts
 ```
@@ -107,7 +107,7 @@ The extension relay connects QFlex to a Chrome profile that you select and keep 
    $node = (Get-Command node).Source
    $brokerEntry = Join-Path $runtime 'packages\broker\dist\bin.js'
    $mcpEntry = Join-Path $runtime 'packages\mcp\dist\stdio.js'
-   $runtimeConfig = 'C:\absolute\path\to\runtime-0.1.6.json'
+   $runtimeConfig = 'C:\absolute\path\to\runtime-0.1.7.json'
    claude mcp add --scope user qflex -e "QFLEX_CONFIG_PATH=$runtimeConfig" -e "QFLEX_BROKER_ENTRY=$brokerEntry" -- $node $mcpEntry
    ```
 
@@ -117,7 +117,7 @@ The extension relay connects QFlex to a Chrome profile that you select and keep 
    node_path="$(command -v node)"
    broker_entry="$runtime/packages/broker/dist/bin.js"
    mcp_entry="$runtime/packages/mcp/dist/stdio.js"
-   runtime_config="$HOME/.qflex/runtime-0.1.6.json"
+   runtime_config="$HOME/.qflex/runtime-0.1.7.json"
    claude mcp add --scope user qflex -e "QFLEX_CONFIG_PATH=$runtime_config" -e "QFLEX_BROKER_ENTRY=$broker_entry" -- "$node_path" "$mcp_entry"
    ```
 

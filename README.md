@@ -6,7 +6,7 @@ QFlex runs browser actions within the calling agent's requested scope. Its curre
 
 ## Status
 
-QFlex 0.1.6 is an experimental pre-release provided for preview and evaluation. Website coverage, connected-agent acceptance, and support on specific operating systems have not been established.
+QFlex 0.1.7 is an experimental pre-release provided for preview and evaluation. Website coverage, connected-agent acceptance, and support on specific operating systems have not been established.
 
 ## Download and install
 
