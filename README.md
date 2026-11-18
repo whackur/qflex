@@ -6,11 +6,11 @@ QFlex runs browser actions within the calling agent's requested scope. Its curre
 
 ## Status
 
-QFlex 0.1.7 is an experimental pre-release provided for preview and evaluation. Website coverage, connected-agent acceptance, and support on specific operating systems have not been established.
+QFlex 0.1.10 is an experimental pre-release provided for preview and evaluation. Website coverage, connected-agent acceptance, and support on specific operating systems have not been established.
 
 ## Download and install
 
-Download the runtime archives and checksum file from [GitHub Releases](https://github.com/whackur/qflex/releases). Releases provide a ZIP archive, a tar.gz archive, and SHA256SUMS. The archives contain compiled JavaScript and runtime assets. Installation requires Node.js 26.7.0 and pnpm 12.11.2; setup downloads production dependencies after extraction.
+Download the runtime archives and checksum file from [GitHub Releases](https://github.com/whackur/qflex/releases). Releases provide a ZIP archive, a tar.gz archive, and SHA256SUMS. The archives contain compiled JavaScript, runtime assets, and the production dependencies. Installation requires Node.js 26.7.0; `node qflex-install.mjs` in the extracted directory installs QFlex into `~/.qflex`, and a managed install then updates itself unless automatic updates are turned off.
 
 Follow the [installation guide](docs/installation.md) for setup steps.
 

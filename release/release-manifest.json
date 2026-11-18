@@ -1,21 +1,21 @@
 {
   "assets": {
-    "SHA256SUMS": "b7eb863d3c5658641abc10888488e570a8c3d7c12cb406aebdb6b4be8dd00e2f",
-    "qflex-0.1.7-runtime.tar.gz": "4d71c0929d17c39bad0e64f4da78de6a866c64ee1baa361e59b06138e014ecfc",
-    "qflex-0.1.7-runtime.zip": "1e8ede1560f8a42dcc5fd27c2653141ac2fed0b2a766f961868b36c12d53362b"
+    "SHA256SUMS": "1c10144020ee789295cdfedb187b30d0b11edcf9b1b1ebb6eed77dd9f1bcf111",
+    "qflex-0.1.10-runtime.tar.gz": "71b3977a6ddb774261c3515ac26e22af4cebc741045fc3df6f3feee2fca3c7d7",
+    "qflex-0.1.10-runtime.zip": "744684f0c7133f8cb048c809fcf9ca7b87ba0d4af4f27991710bac9407660424"
   },
   "files": {
-    ".github/ISSUE_TEMPLATE/bug_report.yml": "2c142ead7438625a7ab2c815459f5b655b1685c22ae8cc423506fc153dd5831b",
+    ".github/ISSUE_TEMPLATE/bug_report.yml": "f5220c4296677aa3792538b0c0688606960a5d259f7490a9b32e0527cf29cb5d",
     ".github/ISSUE_TEMPLATE/config.yml": "1f103c6a9dd07cd13a9a6f17ace6b813f47747eb9cb7e00488cb2073caaf91bb",
     ".github/ISSUE_TEMPLATE/feature_request.yml": "c1991887bc25235c4ae7a02148c51adc8fd43827a83ed424fe906565f54feb36",
-    "CHANGELOG.md": "155de4ca15dd3bb90eaaab8d57d28e9c23dbdc5f464539784fc31cbdee8a536d",
+    "CHANGELOG.md": "612c20fa03406bc4773eb7b4389415a3a9bb16b8172771ea0f2828bb5c8a9a1d",
     "CONTRIBUTING.md": "9da7ac40242c316bf44b763139f3b547657348109bdba1f17e2a5b844bd0a202",
     "LICENSE": "706541113563ec08952bea3521c9161a7751f77ad6c53ac1ca8e3252f92f04b9",
-    "README.md": "3d17284147243c4a73e7cd9187599b5b77319df205fcac8b0c4738ef78fad5b5",
-    "docs/installation.md": "bcbc670f3609c3685d0cef2e233e678bb2a6fa9072a99318af07ca79b9ac6c38"
+    "README.md": "eb4ef33890961af32c8e2212c2dedc9b6cff80578025d425275d9219757ce24e",
+    "docs/installation.md": "cce5abd2348b56dfab58b767ce3b05a4cfcac05c178e351b72bf0fc6e44b6771"
   },
-  "fingerprint": "b932c4f59ebdaa0c1c11e662fa9917a429963a40beeb900c0fa959964dd94b90",
-  "notesSha256": "352a86c4c785a38d4085d689e54b6d1a7bc45007e6291703bcd7e2ddb805558d",
+  "fingerprint": "034af0a87cbc8c0f6eb3fad6c243b84b863b0ea527c632d0ec15edad20966766",
+  "notesSha256": "03cc090454b8d23ebe2d4d5d99be65bd6c2523ea493d477428d4d5392d3fa387",
   "schemaVersion": 1,
-  "version": "0.1.7"
+  "version": "0.1.10"
 }

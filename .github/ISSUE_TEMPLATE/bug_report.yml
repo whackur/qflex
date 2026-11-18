@@ -10,7 +10,7 @@ body:
     attributes:
       label: QFlex version
       description: Which release are you using?
-      placeholder: "0.1.7"
+      placeholder: "0.1.10"
     validations:
       required: true
   - type: input
