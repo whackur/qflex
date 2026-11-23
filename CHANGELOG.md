@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.14 — Experimental pre-release
+
+- Installing or updating on macOS no longer fails with `smoke_failed` under the default temporary directory: the staged-version smoke test now keeps its Broker socket path within the macOS limit.
+- On macOS, installs of 0.1.10 through 0.1.13 still use their own updater, which cannot stage this release. Install 0.1.14 once with the steps in the installation guide; later releases then update automatically.
+
 ## 0.1.13 — Experimental pre-release
 
 - The installation guide explains how the MCP server, Broker, native host, and CLI processes work together, when the Broker starts and exits, and how to restart it after changing configuration.
