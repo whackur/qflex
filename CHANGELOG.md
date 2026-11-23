@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.13 — Experimental pre-release
+
+- The installation guide explains how the MCP server, Broker, native host, and CLI processes work together, when the Broker starts and exits, and how to restart it after changing configuration.
+- The installation guide shows how to create a `qflex` command launcher on Windows, macOS, and Linux, lists the CLI commands for operating an install, and describes manual update activation and its `blocked` reasons.
+- The installer's final next step now points to the public installation guide.
+
+## 0.1.12 — Experimental pre-release
+
+- QFlex can bind to an authorized Hermes Desktop browser tab and keep the tab binding through human handoff.
+- Targeted actions highlight their target by default in regular browser sessions. Embedded Desktop tabs keep action highlighting disabled, and a disabled setting still turns off the highlight in other sessions.
+- The QFlex control cursor stays trackable after page navigation and returns when a new document is ready.
+
+## 0.1.11 — Experimental pre-release
+
+- Tasks now wait at least 250 ms instead of 500 ms after a click or typed text when the page goes quiet at once. A combobox, or a transition or animation that the input started and that is still running, keeps the 500 ms wait.
+- When a page keeps loading after an input, a task that declares completion conditions can wait up to two more steps instead of having to act after a single wait.
+- Observations are faster on very large pages: resolving element selectors no longer scans the whole document once per element.
+- The bundled Public Suffix List data is newer. A credential scope domain can no longer be one of the newly listed public suffixes, such as `run.app`; a stored scope that names one is rejected and needs a registrable domain under it.
+
 ## 0.1.10 — Experimental pre-release
 
 - Public release archives now include a managed installer. Run `node qflex-install.mjs` from the extracted runtime to set up the stable `current` path. Install once from the archive if you use an older installation without that layout.

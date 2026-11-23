@@ -1,6 +1,6 @@
 # Install the QFlex runtime
 
-QFlex 0.1.10 is an experimental, source-free runtime preview. Each archive holds compiled JavaScript, package manifests, the unpacked Chrome extension, and the production dependencies QFlex runs with; it does not include TypeScript source for QFlex, source maps, build scripts, tests, or fixture servers. This release is a prerelease and has not been verified on macOS or Linux.
+QFlex 0.1.13 is an experimental, source-free runtime preview. Each archive holds compiled JavaScript, package manifests, the unpacked Chrome extension, and the production dependencies QFlex runs with; it does not include TypeScript source for QFlex, source maps, build scripts, tests, or fixture servers. This release is a prerelease and has not been verified on macOS or Linux.
 
 ## Requirements
 
@@ -8,13 +8,13 @@ Use Node.js 26.7.0. pnpm is no longer needed to install a release. The runtime r
 
 ## Download and verify
 
-Download one archive and `SHA256SUMS` from the [v0.1.10 prerelease](https://github.com/whackur/qflex/releases/tag/v0.1.10). The direct assets are [ZIP](https://github.com/whackur/qflex/releases/download/v0.1.10/qflex-0.1.10-runtime.zip), [tar.gz](https://github.com/whackur/qflex/releases/download/v0.1.10/qflex-0.1.10-runtime.tar.gz), and [SHA256SUMS](https://github.com/whackur/qflex/releases/download/v0.1.10/SHA256SUMS). Keep the files in the same directory while checking the checksum.
+Download one archive and `SHA256SUMS` from the [v0.1.13 prerelease](https://github.com/whackur/qflex/releases/tag/v0.1.13). The direct assets are [ZIP](https://github.com/whackur/qflex/releases/download/v0.1.13/qflex-0.1.13-runtime.zip), [tar.gz](https://github.com/whackur/qflex/releases/download/v0.1.13/qflex-0.1.13-runtime.tar.gz), and [SHA256SUMS](https://github.com/whackur/qflex/releases/download/v0.1.13/SHA256SUMS). Keep the files in the same directory while checking the checksum.
 
 On Windows PowerShell, verify the ZIP by comparing its digest with the matching `SHA256SUMS` line:
 
 ```powershell
-$actual = (Get-FileHash .\qflex-0.1.10-runtime.zip -Algorithm SHA256).Hash.ToLowerInvariant()
-$expectedLine = Get-Content .\SHA256SUMS | Where-Object { $_ -match '  qflex-0.1.10-runtime\.zip$' }
+$actual = (Get-FileHash .\qflex-0.1.13-runtime.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+$expectedLine = Get-Content .\SHA256SUMS | Where-Object { $_ -match '  qflex-0.1.13-runtime\.zip$' }
 $expected = ($expectedLine -split '\s+')[0]
 if ($actual -ne $expected) { throw 'SHA-256 mismatch' }
 ```
@@ -22,45 +22,103 @@ if ($actual -ne $expected) { throw 'SHA-256 mismatch' }
 On macOS, run:
 
 ```bash
-actual=$(shasum -a 256 ./qflex-0.1.10-runtime.tar.gz | awk '{print $1}')
-expected=$(awk '$2 == "qflex-0.1.10-runtime.tar.gz" { print $1 }' SHA256SUMS)
+actual=$(shasum -a 256 ./qflex-0.1.13-runtime.tar.gz | awk '{print $1}')
+expected=$(awk '$2 == "qflex-0.1.13-runtime.tar.gz" { print $1 }' SHA256SUMS)
 test "$actual" = "$expected"
 ```
 
 On Linux, run:
 
 ```bash
-actual=$(sha256sum ./qflex-0.1.10-runtime.tar.gz | awk '{print $1}')
-expected=$(awk '$2 == "qflex-0.1.10-runtime.tar.gz" { print $1 }' SHA256SUMS)
+actual=$(sha256sum ./qflex-0.1.13-runtime.tar.gz | awk '{print $1}')
+expected=$(awk '$2 == "qflex-0.1.13-runtime.tar.gz" { print $1 }' SHA256SUMS)
 test "$actual" = "$expected"
 ```
 
 ## Extract and install
 
-The archive contains a `qflex-0.1.10-runtime` directory with regular files and directories only. The directory links that Node.js needs to find dependencies are listed in `qflex-links.json`, and the installer creates them. Extract into a new, empty directory, then run the installer from that directory with Node.js.
+The archive contains a `qflex-0.1.13-runtime` directory with regular files and directories only. The directory links that Node.js needs to find dependencies are listed in `qflex-links.json`, and the installer creates them. Extract into a new, empty directory, then run the installer from that directory with Node.js.
 
 Windows PowerShell:
 
 ```powershell
-$extractBase = Join-Path $env:TEMP 'qflex-0.1.10'
+$extractBase = Join-Path $env:TEMP 'qflex-0.1.13'
 New-Item -ItemType Directory -Path $extractBase | Out-Null
-Expand-Archive .\qflex-0.1.10-runtime.zip -DestinationPath $extractBase
-node (Join-Path $extractBase 'qflex-0.1.10-runtime\qflex-install.mjs')
+Expand-Archive .\qflex-0.1.13-runtime.zip -DestinationPath $extractBase
+node (Join-Path $extractBase 'qflex-0.1.13-runtime\qflex-install.mjs')
 ```
 
 macOS or Linux with bash or zsh:
 
 ```bash
-extract_base="$(mktemp -d "${TMPDIR:-/tmp}/qflex-0.1.10.XXXXXX")"
-tar -xzf ./qflex-0.1.10-runtime.tar.gz -C "$extract_base"
-node "$extract_base/qflex-0.1.10-runtime/qflex-install.mjs"
+extract_base="$(mktemp -d "${TMPDIR:-/tmp}/qflex-0.1.13.XXXXXX")"
+tar -xzf ./qflex-0.1.13-runtime.tar.gz -C "$extract_base"
+node "$extract_base/qflex-0.1.13-runtime/qflex-install.mjs"
 ```
 
-`qflex-install.mjs` uses only Node.js itself. It creates the listed links inside the extracted directory and then runs `qflex update install --from` on it, which copies the runtime into the managed install at `~/.qflex/app/0.1.10`, makes it the active version through the `~/.qflex/current` link, and prints the MCP client registration and next steps as JSON. A first install also creates the extension directory `~/.qflex/extension-relay/extension`, fills it with this version's extension, and records it; every later update synchronises that directory, so Chrome always loads the extension from there. The installer exits with the same code as that command; a non-zero code means the install did not complete. The registration uses the stable `~/.qflex/current` paths, which keep working when a later version is activated, so register clients with those paths rather than with the extracted directory.
+`qflex-install.mjs` uses only Node.js itself. It creates the listed links inside the extracted directory and then runs `qflex update install --from` on it, which copies the runtime into the managed install at `~/.qflex/app/0.1.13`, makes it the active version through the `~/.qflex/current` link, and prints the MCP client registration and next steps as JSON. A first install also creates the extension directory `~/.qflex/extension-relay/extension`, fills it with this version's extension, and records it; every later update synchronises that directory, so Chrome always loads the extension from there. The installer exits with the same code as that command; a non-zero code means the install did not complete. The registration uses the stable `~/.qflex/current` paths, which keep working when a later version is activated, so register clients with those paths rather than with the extracted directory.
 
 Installs made before this version (with the earlier extract-and-`pnpm install` instructions) are not managed installs and are never updated. Reinstall once with these steps, point your MCP client at the new paths, load the extension from `~/.qflex/extension-relay/extension`, and prepare and register the native host again from `~/.qflex/current`.
 
 `third-party-licenses.json` at the runtime root lists each bundled dependency with its name, version, and declared license; each dependency keeps its own license files in its package directory.
+
+## How QFlex runs
+
+A QFlex install runs as separate Node.js processes, all started from `~/.qflex/current`:
+
+- **MCP server** (`packages/mcp/dist/stdio.js`): each MCP client session, such as one Claude Code or Codex session, starts its own server over stdio. It starts nothing else when it starts; it forwards browser tool calls to the Broker.
+- **Broker** (`packages/broker/dist/bin.js`): the only process that controls Chrome and owns sessions, tabs, observations, actions, and their records. When the client registration sets `QFLEX_BROKER_ENTRY`, as in the setup below, the first tool call that needs the browser starts a Broker if none is running. The Broker outlives the MCP server that started it and is shared by every MCP server, from any client, that uses the same profile and data directory, so those sessions share the profile's cookies and storage. After 30 minutes with no session or request it exits, and the next browser tool call starts it again.
+- **Native host** (`packages/extension-host`): Chrome starts it for the extension relay; it connects the QFlex extension in your Chrome profile to the Broker.
+- **CLI** (`packages/cli/dist/bin.js`): runs one command and exits; see [Run the QFlex CLI](#run-the-qflex-cli).
+
+The Broker reads the runtime configuration, `~/.qflex/config.yaml`, and `~/.qflex/credentials.yaml` once when it starts. After changing any of them, run `qflex broker stop`; the next browser tool call starts a Broker with the new settings. `broker stop` refuses while browser work is live, and that work may belong to another agent sharing the Broker, so finish or close those sessions and run it again.
+
+## Run the QFlex CLI
+
+The installer does not put a `qflex` command on your `PATH`. The CLI entry is `~/.qflex/current/packages/cli/dist/bin.js`, and you can always run it as `node ~/.qflex/current/packages/cli/dist/bin.js <command>` (PowerShell: `node (Join-Path $HOME '.qflex\current\packages\cli\dist\bin.js') <command>`). The commands in this guide are written as `qflex <command>`; either create the launcher below once or substitute the full `node` form.
+
+The launcher runs the CLI through the stable `current` link, so it keeps working after every update and never needs to be recreated. It starts whichever `node` is first on `PATH`, which must satisfy the Node.js requirement above.
+
+macOS or Linux with bash or zsh, using `~/.local/bin`:
+
+```bash
+mkdir -p "$HOME/.local/bin"
+cat > "$HOME/.local/bin/qflex" <<'EOF'
+#!/bin/sh
+exec node "$HOME/.qflex/current/packages/cli/dist/bin.js" "$@"
+EOF
+chmod 755 "$HOME/.local/bin/qflex"
+```
+
+Many Linux distributions already include `~/.local/bin` on `PATH`; macOS does not. If `command -v qflex` prints nothing in a new terminal, add `export PATH="$HOME/.local/bin:$PATH"` to `~/.zshrc` (zsh, the macOS default) or `~/.bashrc` (bash), then open a new terminal.
+
+Windows PowerShell, creating `qflex.cmd` under `%LOCALAPPDATA%\QFlex\bin` and adding that directory to your user `Path`:
+
+```powershell
+$bin = Join-Path $env:LOCALAPPDATA 'QFlex\bin'
+New-Item -ItemType Directory -Force -Path $bin | Out-Null
+Set-Content -LiteralPath (Join-Path $bin 'qflex.cmd') -Encoding ascii -Value '@echo off', 'node "%USERPROFILE%\.qflex\current\packages\cli\dist\bin.js" %*'
+$userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+if (("$userPath" -split ';') -notcontains $bin) {
+  [Environment]::SetEnvironmentVariable('Path', (("$userPath".TrimEnd(';'), $bin) -join ';').TrimStart(';'), 'User')
+}
+```
+
+Open a new terminal so the updated `Path` applies; `qflex` then works in PowerShell and Command Prompt. `cmd.exe` re-parses arguments passed through `qflex.cmd`, so for arguments containing quotes or JSON, such as `qflex qa run --task-input`, use the full `node` form instead.
+
+Check the launcher with `qflex update status`, which reads local state only and prints a JSON report. `qflex --help` lists every command. The commands for operating an install are:
+
+| Command | Purpose |
+| --- | --- |
+| `qflex doctor [--json]` | Read-only diagnosis of the resolved configuration and Broker status; it does not start Chrome or call models. |
+| `qflex broker stop` | Ask the project's Broker to shut down gracefully; it refuses while work is live and never starts a Broker. |
+| `qflex update status` | Show the local update state without network access. |
+| `qflex update check` | Ask GitHub for the newest public release. |
+| `qflex update run` | Check and stage a verified newer version according to the update mode, at most once a day, without switching `current`. |
+| `qflex update apply` | Activate a staged version now, with every MCP client closed. |
+| `qflex update rollback` | Return to the version the last update replaced. |
+
+`qflex broker status` reports only a Broker named by an explicit `QFLEX_BROKER_ENDPOINT`; to inspect the Broker your MCP clients use, run `qflex doctor`. The remaining commands (`qa`, `navigation benchmark`, and `calibration collect`) are for QFlex development and evaluation; `qflex --help` describes them.
 
 ## Automatic updates
 
@@ -76,7 +134,18 @@ mcp:
   autoUpdate: off
 ```
 
-or with the `QFLEX_AUTO_UPDATE` environment variable (`apply`, `check`, or `off`), which takes precedence over the config file; set it in the MCP server's environment. Any other value stops the updater instead of falling back. To inspect or trigger it by hand, run `node ~/.qflex/current/packages/cli/dist/bin.js update status`, `update check`, `update run`, `update apply` (activate a staged version now, with every MCP client closed), or `update rollback` (return to the version the last update replaced); each prints a JSON report.
+or with the `QFLEX_AUTO_UPDATE` environment variable (`apply`, `check`, or `off`), which takes precedence over the config file; set it in the MCP server's environment. Any other value stops the updater instead of falling back. To inspect or trigger it by hand, use the `qflex update` commands listed in [Run the QFlex CLI](#run-the-qflex-cli); each prints a JSON report.
+
+### Apply an update by hand
+
+Automatic activation needs no action beyond restarting your MCP clients. To activate a staged version yourself, or when `qflex doctor` or `qflex update status` shows that activation keeps being skipped:
+
+1. Exit every MCP client session that uses QFlex, in every client (each Claude Code and Codex session, for example), so that no QFlex MCP server is running.
+2. Run `qflex broker stop`. Exit code 0 means the Broker stopped or was not running; 1 means it refused because browser work is still live.
+3. Run `qflex update apply` and read `outcome` in its JSON line. `activated` means the new version is active; `not_staged` means there is no newer staged version (run `qflex update run` to stage one).
+4. On `blocked`, the `reason` names what kept the running version: `version_in_use` (a QFlex MCP server, native host, or CLI of the install is still running), `broker_running` or `broker_refused` (a Broker still has live work), `process_listing_unsure` (the process list could not be read), or `launcher_names_version` (see below). Remove that cause and run the command again.
+
+Start your MCP clients again afterwards; their MCP servers then run the activated version.
 
 A native host registered from an earlier version runs that version directly. Because an older native host can reject a newer Broker and extension, updates are not activated while it is registered (`launcher_names_version`). Run `node ~/.qflex/current/packages/extension-host/dist/bin.js register` once; it rewrites only the launcher so it follows `~/.qflex/current`, and leaves the host configuration and secret as they are.
 
@@ -206,13 +275,13 @@ To use the local backend, set the runtime configuration to `{"schemaVersion":1,"
 Run the read-only doctor command with the same environment as the MCP server to inspect its resolved configuration and Broker status:
 
 ```powershell
-node "$runtime\packages\cli\dist\bin.js" doctor --broker-entry "$runtime\packages\broker\dist\bin.js"
+qflex doctor --broker-entry "$runtime\packages\broker\dist\bin.js"
 ```
 
 ```bash
-node "$runtime/packages/cli/dist/bin.js" doctor --broker-entry "$runtime/packages/broker/dist/bin.js"
+qflex doctor --broker-entry "$runtime/packages/broker/dist/bin.js"
 ```
 
 The doctor does not start Chrome or call models. To verify browser access, use your MCP client to make a browser call after the extension and native host are installed, or after choosing the local backend. Tool listing by itself does not verify browser access.
 
-QFlex makes no internal model calls without an explicit runtime model configuration. Configure any optional provider only in the Broker runtime and credentials setup described by the project documentation; do not put secrets in this MCP client configuration.
+QFlex makes no internal model calls without an explicit runtime model configuration. Optional internal model providers belong in the Broker's runtime configuration and `~/.qflex/credentials.yaml`, never in the MCP client configuration. A connected agent can call the QFlex `settings` tool with kind `get` and follow its `setup.nextSteps`, which name each required setting and whether the running Broker must be restarted, without reading credential values.
