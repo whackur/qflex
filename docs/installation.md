@@ -1,6 +1,6 @@
 # Install the QFlex runtime
 
-QFlex 0.1.14 is an experimental, source-free runtime preview. Each archive holds compiled JavaScript, package manifests, the unpacked Chrome extension, and the production dependencies QFlex runs with; it does not include TypeScript source for QFlex, source maps, build scripts, tests, or fixture servers. This release is a prerelease and has not been verified on macOS or Linux.
+QFlex 0.1.15 is an experimental, source-free runtime preview. Each archive holds compiled JavaScript, package manifests, the unpacked Chrome extension, and the production dependencies QFlex runs with; it does not include TypeScript source for QFlex, source maps, build scripts, tests, or fixture servers. This release is a prerelease and has not been verified on macOS or Linux.
 
 ## Requirements
 
@@ -8,13 +8,13 @@ Use Node.js 26.7.0. pnpm is no longer needed to install a release. The runtime r
 
 ## Download and verify
 
-Download one archive and `SHA256SUMS` from the [v0.1.14 prerelease](https://github.com/whackur/qflex/releases/tag/v0.1.14). The direct assets are [ZIP](https://github.com/whackur/qflex/releases/download/v0.1.14/qflex-0.1.14-runtime.zip), [tar.gz](https://github.com/whackur/qflex/releases/download/v0.1.14/qflex-0.1.14-runtime.tar.gz), and [SHA256SUMS](https://github.com/whackur/qflex/releases/download/v0.1.14/SHA256SUMS). Keep the files in the same directory while checking the checksum.
+Download one archive and `SHA256SUMS` from the [v0.1.15 prerelease](https://github.com/whackur/qflex/releases/tag/v0.1.15). The direct assets are [ZIP](https://github.com/whackur/qflex/releases/download/v0.1.15/qflex-0.1.15-runtime.zip), [tar.gz](https://github.com/whackur/qflex/releases/download/v0.1.15/qflex-0.1.15-runtime.tar.gz), and [SHA256SUMS](https://github.com/whackur/qflex/releases/download/v0.1.15/SHA256SUMS). Keep the files in the same directory while checking the checksum.
 
 On Windows PowerShell, verify the ZIP by comparing its digest with the matching `SHA256SUMS` line:
 
 ```powershell
-$actual = (Get-FileHash .\qflex-0.1.14-runtime.zip -Algorithm SHA256).Hash.ToLowerInvariant()
-$expectedLine = Get-Content .\SHA256SUMS | Where-Object { $_ -match '  qflex-0.1.14-runtime\.zip$' }
+$actual = (Get-FileHash .\qflex-0.1.15-runtime.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+$expectedLine = Get-Content .\SHA256SUMS | Where-Object { $_ -match '  qflex-0.1.15-runtime\.zip$' }
 $expected = ($expectedLine -split '\s+')[0]
 if ($actual -ne $expected) { throw 'SHA-256 mismatch' }
 ```
@@ -22,41 +22,41 @@ if ($actual -ne $expected) { throw 'SHA-256 mismatch' }
 On macOS, run:
 
 ```bash
-actual=$(shasum -a 256 ./qflex-0.1.14-runtime.tar.gz | awk '{print $1}')
-expected=$(awk '$2 == "qflex-0.1.14-runtime.tar.gz" { print $1 }' SHA256SUMS)
+actual=$(shasum -a 256 ./qflex-0.1.15-runtime.tar.gz | awk '{print $1}')
+expected=$(awk '$2 == "qflex-0.1.15-runtime.tar.gz" { print $1 }' SHA256SUMS)
 test "$actual" = "$expected"
 ```
 
 On Linux, run:
 
 ```bash
-actual=$(sha256sum ./qflex-0.1.14-runtime.tar.gz | awk '{print $1}')
-expected=$(awk '$2 == "qflex-0.1.14-runtime.tar.gz" { print $1 }' SHA256SUMS)
+actual=$(sha256sum ./qflex-0.1.15-runtime.tar.gz | awk '{print $1}')
+expected=$(awk '$2 == "qflex-0.1.15-runtime.tar.gz" { print $1 }' SHA256SUMS)
 test "$actual" = "$expected"
 ```
 
 ## Extract and install
 
-The archive contains a `qflex-0.1.14-runtime` directory with regular files and directories only. The directory links that Node.js needs to find dependencies are listed in `qflex-links.json`, and the installer creates them. Extract into a new, empty directory, then run the installer from that directory with Node.js.
+The archive contains a `qflex-0.1.15-runtime` directory with regular files and directories only. The directory links that Node.js needs to find dependencies are listed in `qflex-links.json`, and the installer creates them. Extract into a new, empty directory, then run the installer from that directory with Node.js.
 
 Windows PowerShell:
 
 ```powershell
-$extractBase = Join-Path $env:TEMP 'qflex-0.1.14'
+$extractBase = Join-Path $env:TEMP 'qflex-0.1.15'
 New-Item -ItemType Directory -Path $extractBase | Out-Null
-Expand-Archive .\qflex-0.1.14-runtime.zip -DestinationPath $extractBase
-node (Join-Path $extractBase 'qflex-0.1.14-runtime\qflex-install.mjs')
+Expand-Archive .\qflex-0.1.15-runtime.zip -DestinationPath $extractBase
+node (Join-Path $extractBase 'qflex-0.1.15-runtime\qflex-install.mjs')
 ```
 
 macOS or Linux with bash or zsh:
 
 ```bash
-extract_base="$(mktemp -d "${TMPDIR:-/tmp}/qflex-0.1.14.XXXXXX")"
-tar -xzf ./qflex-0.1.14-runtime.tar.gz -C "$extract_base"
-node "$extract_base/qflex-0.1.14-runtime/qflex-install.mjs"
+extract_base="$(mktemp -d "${TMPDIR:-/tmp}/qflex-0.1.15.XXXXXX")"
+tar -xzf ./qflex-0.1.15-runtime.tar.gz -C "$extract_base"
+node "$extract_base/qflex-0.1.15-runtime/qflex-install.mjs"
 ```
 
-`qflex-install.mjs` uses only Node.js itself. It creates the listed links inside the extracted directory and then runs `qflex update install --from` on it, which copies the runtime into the managed install at `~/.qflex/app/0.1.14`, makes it the active version through the `~/.qflex/current` link, and prints the MCP client registration and next steps as JSON. A first install also creates the extension directory `~/.qflex/extension-relay/extension`, fills it with this version's extension, and records it; every later update synchronises that directory, so Chrome always loads the extension from there. The installer exits with the same code as that command; a non-zero code means the install did not complete. The registration uses the stable `~/.qflex/current` paths, which keep working when a later version is activated, so register clients with those paths rather than with the extracted directory.
+`qflex-install.mjs` uses only Node.js itself. It creates the listed links inside the extracted directory and then runs `qflex update install --from` on it, which copies the runtime into the managed install at `~/.qflex/app/0.1.15`, makes it the active version through the `~/.qflex/current` link, and prints the MCP client registration and next steps as JSON. A first install also creates the extension directory `~/.qflex/extension-relay/extension`, fills it with this version's extension, and records it; every later update synchronises that directory, so Chrome always loads the extension from there. The installer exits with the same code as that command; a non-zero code means the install did not complete. The registration uses the stable `~/.qflex/current` paths, which keep working when a later version is activated, so register clients with those paths rather than with the extracted directory.
 
 Installs made before this version (with the earlier extract-and-`pnpm install` instructions) are not managed installs and are never updated. Reinstall once with these steps, point your MCP client at the new paths, load the extension from `~/.qflex/extension-relay/extension`, and prepare and register the native host again from `~/.qflex/current`.
 

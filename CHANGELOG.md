@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.15 — Experimental pre-release
+
+- Screenshots can label observed targets with their identifiers, making it easier to match a visible control to an action.
+- Browser observations can include selected console levels and network response information. Local browser tabs also support viewport settings.
+- MCP tool descriptions share repeated schema definitions when doing so reduces their size.
+
 ## 0.1.14 — Experimental pre-release
 
 - Installing or updating on macOS no longer fails with `smoke_failed` under the default temporary directory: the staged-version smoke test now keeps its Broker socket path within the macOS limit.
