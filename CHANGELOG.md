@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.16 — Experimental pre-release
+
+- For private input through the extension relay, open the QFlex toolbar icon to confirm the site and requested fields. Preparing the request creates no tab or window.
+- Update the Broker and native host before loading the new extension. The toolbar uses version 2 of the private-input relay capability.
+
 ## 0.1.15 — Experimental pre-release
 
 - Screenshots can label observed targets with their identifiers, making it easier to match a visible control to an action.
